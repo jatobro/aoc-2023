@@ -4,10 +4,6 @@ const lines = input.split("\n");
 
 console.log("lines", lines);
 
-const RED_MAX = 12;
-const GREEN_MAX = 13;
-const BLUE_MAX = 14;
-
 const games = lines.map((line) =>
   line
     .split(":")[1]
@@ -25,8 +21,9 @@ console.log("games", games);
 let sum = 0;
 
 games.forEach((game) => {
-  let isPossible = true;
-
+  let r_min = 0,
+    g_min = 0,
+    b_min = 0;
   game.forEach((set) => {
     let r = 0,
       g = 0,
@@ -45,12 +42,20 @@ games.forEach((game) => {
       }
     });
 
-    if (r > RED_MAX || g > GREEN_MAX || b > BLUE_MAX) {
-      isPossible = false;
+    if (r > r_min) {
+      r_min = r;
+    }
+
+    if (g > g_min) {
+      g_min = g;
+    }
+
+    if (b > b_min) {
+      b_min = b;
     }
   });
 
-  sum += isPossible ? games.indexOf(game) + 1 : 0;
+  sum += r_min * g_min * b_min;
 });
 
-console.log("sum", sum);
+console.log("sum of power", sum);
