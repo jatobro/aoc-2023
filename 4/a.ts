@@ -25,7 +25,7 @@ cards.forEach((card) => {
   const winningNumbers = card[0];
   const playerNumbers = card[1];
 
-  let winCount = -1;
+  let winCount = 0;
 
   winningNumbers.forEach((winningNumber) => {
     if (playerNumbers.indexOf(winningNumber) !== -1) {
@@ -33,13 +33,7 @@ cards.forEach((card) => {
     }
   });
 
-  let points = 0;
-
-  if (winCount !== -1) {
-    points = 2 ** winCount;
-  }
-
-  result += points;
+  result += winCount > 0 ? 2 ** (winCount - 1) : 0;
 });
 
 console.log("result", result);
